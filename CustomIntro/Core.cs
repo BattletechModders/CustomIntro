@@ -4,7 +4,7 @@ using BattleTech.Rendering;
 using BattleTech.Save;
 using BattleTech.UI;
 using BinkPlugin;
-using Harmony;
+using HarmonyLib;
 using HBS;
 using Localize;
 using Newtonsoft.Json;
@@ -186,7 +186,7 @@ namespace CustomIntro {
       played.alreadyPlayed.Add(key);
     }
     public static PlayedIntrosDef played { get; set; } = new PlayedIntrosDef();
-    public static HarmonyInstance harmony { get; set; } = null;
+    public static Harmony harmony { get; set; } = null;
     public static string BaseDir { get; private set; }
     public static string LocalSettingsDir { get; set; } = string.Empty;
     public static Settings settings { get; set; } = new Settings();
@@ -266,7 +266,7 @@ namespace CustomIntro {
           }
         }
         try {
-          harmony = HarmonyInstance.Create("io.kmission.customintro");
+          harmony = new Harmony("io.kmission.customintro");
           harmony.PatchAll(Assembly.GetExecutingAssembly());
         } catch (Exception e) {
           Log.TWL(0, e.ToString(), true);
